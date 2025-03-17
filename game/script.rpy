@@ -119,7 +119,14 @@ label start:
             "Fireplace":
                 jump fire_path
             "Fridge":
+                "You go by your day. Few weeks pass by."
+                "You see the egg sometimes when you open and close the fridge."
+                "One day, you think you might need to take the egg out as it was stupid of you to put it inside the fridge"
+                "Who puts an egg that would hatch into the fridge?"
+                scene fridge
+                "You take the egg out"
                 jump ice_path
+                
             "Closet":
                 scene closet:
                     size(1920, 1080)
