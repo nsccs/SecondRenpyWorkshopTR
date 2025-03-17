@@ -8,7 +8,9 @@
 #slideleft (Also:  slideright, slideup, slidedown),
 #slideawayleft (Also: slideawayright, slideawayup, slideawaydown),
 #irisin, irisout. 
+
 define WithShadow = False
+define MC = Character("Main Character")
 
 
 label shadow_path:
@@ -40,6 +42,7 @@ label shadow_path:
         "Name the monster":
             $ MO_Name = renpy.input("Enter name:", length=32).capitalize()
             $ MO = Character(MO_Name)
+            $ Aff = 0
             $ Aff += 5
             show shadow baby happy
             "They chirp happily"
