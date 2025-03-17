@@ -1,9 +1,4 @@
 define WithShadow = False
-define Aff = 0
-define MO_Name = "Monster"
-define MC_Name = "Nicholas Monkshire"
-define MO = Character(MO_Name)
-define MC = Character(MC_Name)
 
 label shadow_path:
     scene inside house
