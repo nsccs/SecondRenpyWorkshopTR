@@ -7,6 +7,8 @@ define MO_Name = "Monster"
 define MC_Name = "Nicholas Monkshire"
 define MO = Character(MO_Name)
 define MC = Character(MC_Name)
+define u = Character("Unknown")
+define Aff = 0
 
 init: 
     image Outside House = "Outside House.png"
@@ -26,7 +28,7 @@ label start:
     # add a file (named either "bg room.png" or "bg room.jpg") to the
     # images directory to show it.
 
-    scene bg room
+    scene inside house
 
     # This shows a character sprite. A placeholder is used, but you can
     # replace it by adding a file named "eileen happy.png" to the images
@@ -38,10 +40,10 @@ label start:
             
         "That's not my name":
             $ MC_Name = renpy.input("What is your name?").capitalize()
-            $ MC = character(MC_Name)
+            $ MC = Character(MC_Name)
             "You are [MC_Name]"
 
-
+    $ a = MC
     
     label characterAlice:
         scene park:
@@ -49,7 +51,7 @@ label start:
 
         "You are walking in a park. It's a nice sunny day"
 
-        show alice happy
+        
 
         "You stray into a different path and accidentally go through a hidden way."
 
@@ -64,7 +66,7 @@ label start:
         u "All you need to do is take the egg with you."
         u "I'll finally be free of this burden."
 
-        hide alice happy
+        
 
         "A bright light appears."
         scene bright:
@@ -84,7 +86,7 @@ label start:
                 "You stumble into stuff."
                 a "I'm really lost. Isn't this just the park near my house?"
                 "As you go ahead suddenly you start to suffocate and die in there."
-                a "Mom!!!, I can't breathe."
+                a "Mom!!! I can't breathe."
                 a "Plea.. sav..."
                 u "You made your decision. See you next time."
                 scene black
@@ -98,7 +100,7 @@ label start:
         scene park:
             size(1920, 1080)
         a "What am I supposed to do with this now?"
-        a "Atleast I am alive."
+        a "At least I am alive."
         "You walk your way home."
 
         scene Outside House

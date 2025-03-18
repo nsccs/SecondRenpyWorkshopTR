@@ -32,7 +32,6 @@ label shadow_path:
         "Name the monster":
             $ MO_Name = renpy.input("Enter name:", length=32).capitalize()
             $ MO = Character(MO_Name)
-            $ Aff = 0
             $ Aff += 5
             show shadow baby happy
             "They chirp happily"
@@ -47,14 +46,14 @@ label shadow_path:
             "Finally, the dense thing understands that you aren't going to name it, 
             and slinks away into a dark corner to leave you alone"
     show shadow baby
-    "You're unsure what you'll have to feed [MO_Name], but thankfully it seems whatever kind of shadow monster they are is 
-    herbivorous and very interested in a few vegetables from your garden"
+    "You're unsure what you'll have to feed [MO_Name], but thankfully it seems whatever kind of shadow monster they are isn't
+    carnivorous, as it's very interested in a few vegetables from your garden"
     menu:
         "Feed [MO_Name]":
             $ Aff += 5
             show shadow baby happy
             "They give a happy chirp and quickly eat"
-        "It can wait":
+        "It can fend for itself":
             $ Aff -= 5
             "You grab the food and move it out of reach, vegetables are valueable and you aren't about to waste them when
             it could probably feed itself"
@@ -62,6 +61,7 @@ label shadow_path:
             "It stares mornfully at the veggies, but leaves to forage in the forest when you remain steadfast and nudge 
             it in that direction"
             hide shadow baby with fade
+            pause 1.5
             "It takes a few hours, but eventually [MO_Name] returns, dragging its clawed feet"
             show shadow baby sad with moveinleft
     show shadow baby      
@@ -150,7 +150,7 @@ label shadow_path:
             MO"Kweh?"
             show charm
             menu:
-                "Give [MO_Name] the charm as a reward":
+                "Give [MO_Name] the charm":
                     $ Aff += 10
                     MC"Here, for you"
                     show shadow baby happy
