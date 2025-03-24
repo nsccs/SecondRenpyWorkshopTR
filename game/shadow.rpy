@@ -32,7 +32,6 @@ label shadow_path:
         "Name the monster":
             $ MO_Name = renpy.input("Enter name:", length=32).capitalize()
             $ MO = Character(MO_Name)
-            $ Aff = 0
             $ Aff += 5
             show shadow baby happy
             "They chirp happily"
@@ -47,14 +46,14 @@ label shadow_path:
             "Finally, the dense thing understands that you aren't going to name it, 
             and slinks away into a dark corner to leave you alone"
     show shadow baby
-    "You're unsure what you'll have to feed [MO_Name], but thankfully it seems whatever kind of shadow monster they are is 
-    herbivorous and very interested in a few vegetables from your garden"
+    "You're unsure what you'll have to feed [MO_Name], but thankfully it seems whatever kind of shadow monster they are isn't
+    carnivorous, as it's very interested in a few vegetables from your garden"
     menu:
         "Feed [MO_Name]":
             $ Aff += 5
             show shadow baby happy
             "They give a happy chirp and quickly eat"
-        "It can wait":
+        "It can fend for itself":
             $ Aff -= 5
             "You grab the food and move it out of reach, vegetables are valueable and you aren't about to waste them when
             it could probably feed itself"
@@ -62,8 +61,9 @@ label shadow_path:
             "It stares mornfully at the veggies, but leaves to forage in the forest when you remain steadfast and nudge 
             it in that direction"
             hide shadow baby with fade
+            pause 1.5
             "It takes a few hours, but eventually [MO_Name] returns, dragging its clawed feet"
-            show shadow baby sad with moveinleft
+            show shadow baby sad with moveinright
     show shadow baby      
     "That night, you set out a blanket and [MO_Name] hides under it to sleep, happy with the warm darkness"
     hide shadow baby with moveoutbottom
@@ -114,6 +114,7 @@ label shadow_path:
         You'll have to reward them somehow when you get back"
     "On your way back home, you notice a market stall with charms; a string of shiny black beads tipped by iridescent black
     feathers stands out as something [MO_Name] would like"
+    show charm
     menu:
         "Buy the charm":
             MC"Excuse me, I'd like to buy this charm"
@@ -142,6 +143,7 @@ label shadow_path:
             "You decide not to buy the charm and head home"
             if WithShadow == True:
                 "You'll just have to find some other way to reward [MO_Name] later"
+    hide charm with dissolve
     scene outside house
     with fade
     if WithShadow == True:
@@ -150,30 +152,35 @@ label shadow_path:
             MO"Kweh?"
             show charm
             menu:
-                "Give [MO_Name] the charm as a reward":
+                "Give [MO_Name] the charm":
                     $ Aff += 10
                     MC"Here, for you"
                     show shadow baby happy
                     MO"Kwee!"
                     hide charm with dissolve
                     "You both head inside"
+                    scene inside house with fade
                 "Keep it for yourself":
                     $ Aff -= 1
                     MC"No, this is mine"
                     show shadow baby sad
                     hide charm with moveoutbottom
                     "You walk inside and [MO_Name] follows"
+                    scene inside house with fade
                 "Throw it away to spite [MO_Name]":
                     $ Aff -= 10
                     MC"Tch, you don't deserve this"
                     "You walk inside and throw the charm in the fireplace"
-                    scene inside house
+                    hide shadow baby
+                    scene inside house with fade
+                    pause 0.5
                     hide charm with zoomout
                     show shadow baby sad
                     MO"Kwooooh..."
                     "[MO_Name] lets out a mournful coo"
-scene inside house
 if WithShadow == False:
+    pause 0.2
+    scene inside house with fade
     "[MO_Name!c] has been pacing back and forth, waiting for you to come home"
     "The moment you open the door they perk up and rush towards you"
     show shadow baby happy
@@ -200,15 +207,84 @@ if WithShadow == False:
             else:
                 show shadow baby:
                     linear 0.5 zoom 0.75
+                    linear 1.0 zoom 0.8 yalign 0.0
                 MO"Krrr..."
                 "[MO_Name] growls at you before lunging, claws out and sharp"
                 show shadow baby:
                     linear 0.5 zoom 2.5 yalign 0.5
                 "The last thing you see is the vivid red of [MO_Name]'s eyes as it guts you like a fish and the world fades to black"
                 pause 0.5
-                scene game over 
+                scene black 
                 with fade
                 "You treated [MO_Name] poorly and they decided you would be better as prey than a parent"
                 "Perhaps next time you should be kinder"
                 return
+show shadow baby
+"With the day's work done, you have time to train [MO_Name]"
+menu:
+    "Train to help in the garden":
+        $ Aff += 2
+        $ TrainedTo = "Nothing"
+    "Train to attack intruders":
+        $ TrainedTo = "Attack"
+    "Train to stay in your closet unless you let it out":
+        $ Aff -= 2
+        $ TrainedTo = "Hide"
+"It takes days of work, but eventually your monster is fully trained"
+if ShadowSeen == True:
+    "One night, you wake up to the sound of rustling outside your house"
+    "You look out the window to see an angry mob of villagers with torches and pitchforks"
+    show shadow baby
+    menu:
+        "Tell [MO_Name] to hide":
+            if TrainedTo == "Hide":
+                hide shadow baby
+                "[MO_Name!c] runs to your closet and hides themselves under the clothing"
+                "The villagers pound on your door, you let them in, denying their accusation of owning a Shadow Monster"
+                "They check your shadow with a torch, but there's nothing there"
+                "They can't find any evidence of [MO_Name]'s existance, so they apologize and leave"
+                "You let out a sigh of relief and continue on with your life"
+                jump ShadowGameEnding
+            else:
+                hide shadow baby with moveoutbottom
+                "[MO_Name!c] jumps into your shadow"
+                "The villagers pound on your door, you let them in, denying their accusation of owning a Shadow Monster"
+                "They check your shadow with a torch, and [MO_Name] jumps out with a shriek"
+                show shadow baby sad with moveinbottom
 
+        "Tell [MO_Name] to protect you":
+            if TrainedTo == "Attack":
+                scene black with fade
+                "The monster bursts out of your door and attacks the villagers with far more ferocity than you expected"
+                "You hear shouts and screaming, the sickening sound of bones cracking"
+                "Eventually it falls silent"
+                "When you work up the courage to check, you see [MO_Name] covered in blood and eating the fallen villagers"
+                "You cautiously approach"
+                if Aff > 10:
+                    "It takes a moment, but the monster shakes off the haze of bloodlust and churrs at you"
+                    "You aren't sure what you'll do next, but for now you're safe"
+                else:
+                    "[MO_Name!c] lunges at you in a haze of bloodlust, gutting you and leaving your body to bleed out"
+                    "Your last thoughts are of regret"
+                    return
+                
+            else:
+                "[MO_Name!c] lets out a bloodcurdling cry, falling dead after taking down most of the villagers"
+                "The survivors break in and strike you down, faces stained with blood and tears"
+
+        "Tell [MO_Name] to run away":
+            hide shadow baby with moveoutleft
+            scene black with fade
+            "[MO_Name] runs out the back door into the forest"
+            "The villagers pound on your door, you let them in, denying their accusation of owning a Shadow Monster"
+            "They check your shadow with a torch, but there's nothing there"
+            "They can't find any evidence of [MO_Name]'s existance, so they apologize and leave"
+            if Aff > 15:
+                scene outside house with fade
+                show shadow baby with moveinright
+                "The next day, [MO_Name] comes back and you're able to continue your life together"
+                jump ShadowGameEnding
+            else:
+                "[MO_Name!c] never returns"
+                "You don't know why you're surprised, it was practically a wild animal, but it's somewhat melancholy nonetheless"
+                return

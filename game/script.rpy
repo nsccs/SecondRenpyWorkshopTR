@@ -8,6 +8,8 @@ define MO_Name = "Monster"
 define MC_Name = "Nicholas Monkshire"
 define MO = Character(MO_Name)
 define MC = Character(MC_Name)
+define u = Character("Unknown")
+define Aff = 0
 
 init: 
     image end = "end.png"
@@ -33,7 +35,7 @@ label start:
     # add a file (named either "bg room.png" or "bg room.jpg") to the
     # images directory to show it.
 
-    scene bg room
+    scene inside house
 
     # This shows a character sprite. A placeholder is used, but you can
     # replace it by adding a file named "eileen happy.png" to the images
@@ -48,7 +50,7 @@ label start:
             $ MC = Character(MC_Name)
             "You are [MC_Name]"
 
-
+    $ a = MC
     
     label characterAlice:
         scene park:
@@ -91,7 +93,7 @@ label start:
                 "You stumble into stuff."
                 MC "I'm really lost. Isn't this just the park near my house?"
                 "As you go ahead suddenly you start to suffocate and die in there."
-                MC "Mom!!!, I can't breathe."
+                MC "Mom!!! I can't breathe."
                 MC "Plea.. sav..."
                 u "You made your decision. See you next time."
                 scene black
@@ -105,7 +107,7 @@ label start:
         scene park:
             size(1920, 1080)
         MC "What am I supposed to do with this now?"
-        MC "Atleast I am alive."
+        MC "At least I am alive."
         "You walk your way home."
 
         scene Outside House

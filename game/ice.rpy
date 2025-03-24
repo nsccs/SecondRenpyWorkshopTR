@@ -7,6 +7,7 @@ define e = Character("Eileen")
 define b = Character("Brewer")
 define i = Character("Ice Factory Owner")
 define mc = Character("Main Character")
+define entry_written = False
 
 default monster_name = "Ice Monster"
 define mo = Character("[monster_name]")
@@ -46,6 +47,7 @@ label ice_path:
     horn it appears friendly and looks at you with slight expectancy, standing in a relaxed position."
     "The monster looks directly at you, as if waiting for something."
 
+    $ Aff = 0
     menu:
         "Should I give it a name?":
             $ monster_name = renpy.input("Enter name: ", length = 32).capitalize()
@@ -55,6 +57,7 @@ label ice_path:
             hide ice baby happy
             with moveoutright
             # ADD AFFECTION
+            $ Aff += 10
         "Make it go away":
             mc "You're making me cold! Back up!"
             show ice baby sad
@@ -63,6 +66,7 @@ label ice_path:
             hide ice baby
             with moveoutright
             # SUBTRACT AFFECTION
+            $ Aff -= 10
     #show ice baby
     "In preparation of settling in for the colder than usual night you put on some extra clothes."
     "[monster_name] seems unbothered by the cold and curls up in the middle of the room."
@@ -76,11 +80,13 @@ label ice_path:
             "[monster_name] looks longingly out the window and seems to miss the cooling breeze."
             mo "Rshhesss"
             # SUBTRACT AFFECTION
+            $ Aff -= 5
         "Bundle up as tightly as you can and leave the window alone":
             mc "I guess this is more like your natural habitat. Wherever that is."
             show ice baby happy
             "[monster_name] seems to let go of it's tenseness and gently drift off to sleep"
             # ADD AFFECTION
+            $ Aff += 7
     
     show ice baby
     mc "I'm going to have to head into town in the morning and find a way to make some extra money to keep up 
@@ -109,7 +115,22 @@ label ice_path:
         mc "What should I do?"
         menu:
             "Write journal entry":
-                "You write in your journal"
+                if entry_written == False:
+                    mc "Where do I even begin to describe what has been happening?"
+                    "I recently discovered an egg in the woods. . ."
+                    "It appeared normal at first but after keeping it in the fridge it changed. . ."
+                    "Then hatched into this ice creature!"
+                    if [monster_name] != "Ice monster":
+                        "I named it [monster_name]"
+                        mc "Hey [monster_name], I wrote about you in my journal!"
+                        mo "Reelu Reelu!"
+                        "[monster_name] seems happy that you thought about them."
+                        # INCREASE AFFECTION
+                        $ Aff += 3
+                    $ entry_written = True
+                else:
+                    mc "I already wrote in my journal today."
+
             "Head towards the door":
                 jump door_path
 
@@ -141,16 +162,25 @@ label ice_path:
                 show ice baby happy
                 mo "Sruuush!"
                 # INCREASE AFFECTION
-                "The [monster_name] seems to love it's new shady shelter."
+                $ Aff += 5
+                "[monster_name] seems to love it's new shady shelter."
             "Chase it away from the garden":
                 mc "Hey get out of there! You're ruining my plants!"
                 show ice baby sad
                 with moveoutleft
                 mo "Shuruu!!"
                 # DECREASE AFFECTION
+                $ Aff -= 7
                 "[monster_name] runs around towards the back side of the house, looking for some shade."
                 hide ice baby
                 with moveoutleft
+    
+    label ice_ending_path:
+        show ice baby
+        mc "This little creature is adding quite a lot of unpredictability to my day."
+        mc "I wonder how [monster_name] is feeling about all this?"
+        # JUMP INTO ENDING
+        jump iceGameEnding
         
     
 
