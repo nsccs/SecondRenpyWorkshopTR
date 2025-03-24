@@ -338,7 +338,7 @@ label start:
                     "All of a sudden you saw your house turned to a big castle. You were even given the papers for the land and the hgouse. Your monster is very practical :)"
                     scene castle
                     MC "Thank you dear. Now you and I can live together forever."
-                    MO "Monster, yeahhh."
+                    MO "Yayyyyy."
                     show shadow baby happy
                     hide shadow baby happy
                     scene end
@@ -488,10 +488,11 @@ label iceGameEnding:
             "One fine day, you and the monster were chilling around the house."
             scene living room:
                 size(1920, 1080)
-            show shadow baby:
+            show ice baby:
                 linear 0.75
             "Suddenly you heard a sound coming from the monster."
             MO "Hey"
+            hide ice baby happy
             show ice baby happy
             hide ice baby happy
             "You were shocked."
@@ -549,7 +550,7 @@ label iceGameEnding:
                     "All of a sudden you saw your house turned to a big castle. You were even given the papers for the land and the hgouse. Your monster is very practical :)"
                     scene castle
                     MC "Thank you dear. Now you and I can live together forever."
-                    MO "Monster, yeahhh."
+                    MO "Yayyyyy."
                     show ice baby happy
                     hide ice baby happy
                     scene end
