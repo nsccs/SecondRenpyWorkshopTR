@@ -129,8 +129,8 @@ label start:
             size(1920, 1080)
         "Where should you place it?"
         menu: 
-            "Fireplace":
-                jump fire_path
+            #"Fireplace":
+                #jump fire_path
             "Fridge":
                 "You go by your day. Few weeks pass by."
                 "You see the egg sometimes when you open and close the fridge."
@@ -159,12 +159,12 @@ label start:
                 scene closet:
                     size(1920, 1080)
                 "You take the egg out."
-                #jump shadow_path
-                $ Aff = 36
+                jump shadow_path
+
             
 
-    label gameEnding:
-        if Aff <= 35:
+    label shadowGameEnding:
+        if Aff <= -12:
             "You were in your house in the living room"
             scene living room:
                 size(1920, 1080)
@@ -215,7 +215,7 @@ label start:
             MC "Nooooo"
 
 
-        elif 35 < Aff <= 70:
+        elif -12 < Aff <= 10:
             scene living room:
                 size(1920, 1080)
             "It has been a while since you and the monster started living together."
@@ -234,39 +234,38 @@ label start:
             show shadow baby:
                 linear 0.5 zoom 1.5
             hide shadow baby
-            if Aff >35 or Aff < 50 :
+            if Aff >-12 and Aff < 0 :
                 "The monster finally says its goodbye to you."
                 "It is both happy and sad leaving you."
                 show shadow baby
                 MC "I hope you'll have a nice life my friend. You'll always be welcomed here."
                 MC "Bye!!"
                 scene field:
-                size(1920, 1080)
+                    size(1920, 1080)
                 "Kweh!!"
                 "THE END"                   
                 scene end
-
-                "The monster is too attached to you to go anywhere far from you.":
-                    MC "You love me that much?"
-                    show shadow baby happy
-                    MC "Aww, you can live with me for as long as you want to."
-                    window hide
-                    show shadow baby with moveinbottom
-                    pause 0.15
-                    hide shadow baby with moveoutbottom
-                    pause 0.1
-                    show shadow baby happy with moveinbottom
-                    pause 0.2
-                    hide shadow baby happy with moveoutbottom
-                    pause 0.1
-                    show shadow baby with moveinbottom
-                    pause 0.15
-                    hide shadow baby with moveoutbottom
-                    window show
-
-                    show shadow baby happy
-                    hide shadow baby happy
-                    "THE END"
+            if Aff >= 0 and Aff <= 10 :
+                "The monster is too attached to you to go anywhere far from you."
+                MC "You love me that much?"
+                show shadow baby happy
+                MC "Aww, you can live with me for as long as you want to."
+                window hide
+                show shadow baby with moveinbottom
+                pause 0.15
+                hide shadow baby with moveoutbottom
+                pause 0.1
+                show shadow baby happy with moveinbottom
+                pause 0.2
+                hide shadow baby happy with moveoutbottom
+                pause 0.1
+                show shadow baby with moveinbottom
+                pause 0.15
+                hide shadow baby with moveoutbottom
+                window show
+                show shadow baby happy
+                hide shadow baby happy
+                "THE END"
 
 
         else:
@@ -371,9 +370,215 @@ label start:
 
             
             
+label iceGameEnding:
+        if Aff <= -10 :
+            "You were in your house in the living room"
+            scene living room:
+                size(1920, 1080)
+            "You and the monster had been living together for a few months. You weren't very close and didn't treat it nicely."
+            "The monster was trying to get close to you."
+            window hide
+            show ice baby with moveinbottom
+            pause 0.15
+            hide ice baby with moveoutbottom
+            pause 0.1
+            show ice baby happy with moveinbottom
+            pause 0.2
+            hide ice baby happy with moveoutbottom
+            pause 0.1
+            show ice baby with moveinbottom
+            pause 0.15
+            hide ice baby with moveoutbottom
+            window show
 
+            show ice baby happy
+
+            "Kweh!!"
+            "You didn't like it very much so you pushed it away."
+            show ice baby sad
+            "The monster didn't like it."
+            show ice baby sad:
+                linear 0.5 zoom 1.5
+            "It grew bigger and started breathing fire."
+            scene fire
+            "You were startled."
+            MC "STOP"
+            MC "Hey, what are you doing?"
+            "The monster was angry and didn't feel like stopping."
+            show ice baby sad:
+                linear 0.75 zoom 1.5
+            show outside house fire
+            "It went out of the house and started breathing fire there as well."
+            "The whole village was engulfed by the fire."
+            MC "Please, stop"
+            show ice baby
+            "The monster looked at you and felt a little bit of hesitation."
+            "But, it disappeared in an instant."
+            show ice baby sad:
+                linear 0.5 zoom 1.5
+            "It breathed fire towards you."
+            scene fire:
+                size(1920,1080)
+            MC "Nooooo"
+
+
+        elif -10 < Aff <= 10:
+            scene living room:
+                size(1920, 1080)
+            "It has been a while since you and the monster started living together."
+            show ice baby
+            "You tolerate it and it tolerates you"
+            "You have been getting along well"
+            "The monster and you feel like an unconventional family"
+            "The monster has grown up"
+            show ice baby:
+                linear 0.5 zoom 1.5
+            "It feels the need to part ways with you for its development"
+            hide ice baby
+            MC "Are you finally leaving?"
+            "It looks at you with its unwavering eyes"
+            
+            show ice baby:
+                linear 0.5 zoom 1.5
+            hide ice baby
+            if Aff > -10 or Aff < 0 :
+                "The monster finally says its goodbye to you."
+                "It is both happy and sad leaving you."
+                show ice baby
+                MC "I hope you'll have a nice life my friend. You'll always be welcomed here."
+                MC "Bye!!"
+                scene field:
+                    size(1920, 1080)
+                "Kweh!!"
+                "THE END"                   
+                scene end
+            if Aff >= 0:
+                "The monster is too attached to you to go anywhere far from you."
+                MC "You love me that much?"
+                show ice baby happy
+                MC "Aww, you can live with me for as long as you want to."
+                window hide
+                show ice baby with moveinbottom
+                pause 0.15
+                hide ice baby with moveoutbottom
+                pause 0.1
+                show ice baby happy with moveinbottom
+                pause 0.2
+                hide ice baby happy with moveoutbottom
+                pause 0.1
+                show ice baby with moveinbottom
+                pause 0.15
+                hide ice baby with moveoutbottom
+                window show
+
+                show ice baby happy
+                hide ice baby happy
+                "THE END"
+
+
+        else:
+            scene outside house
+            "You really liked the monster. It was like your kid."
+            "You took it with you everywhere you go and it was your bestfriend."
+            "One fine day, you and the monster were chilling around the house."
+            scene living room:
+                size(1920, 1080)
+            show shadow baby:
+                linear 0.75
+            "Suddenly you heard a sound coming from the monster."
+            MO "Hey"
+            show ice baby happy
+            hide ice baby happy
+            "You were shocked."
+            "Your monster had never uttered a single word before this."
+            MC "You can speak? Oh my god"
+            MC "That's great"
+            "You were overjoyed."
+            show ice baby happy
+            MO "I am very happy too."
+            MO "I want to thank you for taking care of me this well."
+            MO "My kind rarely develops this attribute."
+            MO "And its all because of how well you took care of me that I developed it."
+            hide ice baby happy
+            MC "Aww, I did it because I wanted to. You do not need to thank me"
+            show ice baby
+            MO "Since you have taken care of me I have something to say to you"
+            MO "I can grant you a wish, whatever it may be it'll be fulfilled."
+            MO "Ask away."
+            menu:
+                "I want to be able to fly. Can you do that for me?":
+                    scene wings:
+                        size(1920, 1080)
+                    scene wings:
+                        size(1920, 1080)
+                        zoom 1.5
+
+                    "All of a sudden wings got attached to you body."
+
+                    MC "Thank you so much."
+                    MO "That's alright."
+
+                    scene sky
+                    "You fly to the sky."
+                    "Its nice and you and the monster live happily thereafter."
+                    scene outside house
+                    window hide
+                    show ice baby with moveinbottom
+                    pause 0.15
+                    hide ice baby with moveoutbottom
+                    pause 0.1
+                    show ice baby happy with moveinbottom
+                    pause 0.2
+                    hide ice baby happy with moveoutbottom
+                    pause 0.1
+                    show ice baby with moveinbottom
+                    pause 0.15
+                    hide ice baby with moveoutbottom
+                    window show
+
+                    show ice baby happy
+
+                    hide ice baby happy
+                    scene end
+                "I want a big house. So that I can live with you.":
+                    "All of a sudden you saw your house turned to a big castle. You were even given the papers for the land and the hgouse. Your monster is very practical :)"
+                    scene castle
+                    MC "Thank you dear. Now you and I can live together forever."
+                    MO "Monster, yeahhh."
+                    show ice baby happy
+                    hide ice baby happy
+                    scene end
+                "I do not want anything what I have is enough for now.":
+                    scene living room:
+                        size(1920, 1080)
+                    "Hearing this the monster liked your sincerity. He was expecting something similar to come out of your mouth so, It wasn't shpcking."
+                    MO "Okay, then. As you have said this, I'd like to grant every wish you ask for henceforth."
+                    MC "I wish for you and I to live happily."
+                    "You and the monster live happily and as the time goes the monster grants every wish you asked for. It knew you wouldn't ask for much."
+                    "So, he was happy to comply."
+
+                    window hide
+                    show ice baby with moveinbottom
+                    pause 0.15
+                    hide ice baby with moveoutbottom
+                    pause 0.1
+                    show ice baby happy with moveinbottom
+                    pause 0.2
+                    hide ice baby happy with moveoutbottom
+                    pause 0.1
+                    show ice baby with moveinbottom
+                    pause 0.15
+                    hide ice baby with moveoutbottom
+                    window show
+
+                    show ice baby happy
+                    hide ice baby happy
+                    scene end
+                    "THE END"
+
+            
 
 
     # This ends the game.
 
-    return
+    #return
