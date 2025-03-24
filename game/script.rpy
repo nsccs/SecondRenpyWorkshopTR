@@ -422,6 +422,7 @@ label iceGameEnding:
             scene fire:
                 size(1920,1080)
             MC "Nooooo"
+            return
 
 
         elif -10 < Aff <= 10:
@@ -454,6 +455,7 @@ label iceGameEnding:
                 "Kweh!!"
                 "THE END"                   
                 scene end
+                return
             if Aff >= 0:
                 "The monster is too attached to you to go anywhere far from you."
                 MC "You love me that much?"
@@ -476,6 +478,7 @@ label iceGameEnding:
                 show ice baby happy
                 hide ice baby happy
                 "THE END"
+                return
 
 
         else:
