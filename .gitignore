@@ -1,3 +1,6 @@
 log.txt
 *.rpyc
 /game/cache
+.vscode/settings.json
+.gitignore
+game/.vscode/settings.json
