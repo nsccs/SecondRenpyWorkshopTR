@@ -114,7 +114,7 @@ label shadow_path:
         You'll have to reward them somehow when you get back"
     "On your way back home, you notice a market stall with charms; a string of shiny black beads tipped by iridescent black
     feathers stands out as something [MO_Name] would like"
-    show charm
+    show charm at truecenter
     menu:
         "Buy the charm":
             MC"Excuse me, I'd like to buy this charm"
@@ -150,7 +150,7 @@ label shadow_path:
         show shadow baby with moveinbottom
         if BoughtCharm == True:
             MO"Kweh?"
-            show charm
+            show charm at truecenter
             menu:
                 "Give [MO_Name] the charm":
                     $ Aff += 10
@@ -251,6 +251,10 @@ if ShadowSeen == True:
                 "The villagers pound on your door, you let them in, denying their accusation of owning a Shadow Monster"
                 "They check your shadow with a torch, and [MO_Name] jumps out with a shriek"
                 show shadow baby sad with moveinbottom
+                "The villagers attack before either of you can react"
+                scene black with fade
+                "They menace [MO_Name] with torches and stab it with a pitchfor while it's distracted"
+                "You"
 
         "Tell [MO_Name] to protect you":
             if TrainedTo == "Attack":
@@ -288,3 +292,6 @@ if ShadowSeen == True:
                 "[MO_Name!c] never returns"
                 "You don't know why you're surprised, it was practically a wild animal, but it's somewhat melancholy nonetheless"
                 return
+else:
+    "You and [MO_Name] relax for the rest of the day, content with the training you've finished"
+    jump ShadowGameEnding
