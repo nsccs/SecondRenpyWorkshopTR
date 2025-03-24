@@ -215,6 +215,7 @@ label start:
             scene fire:
                 size(1920,1080)
             MC "Nooooo"
+            return
 
 
         elif -12 < Aff <= 10:
@@ -268,6 +269,7 @@ label start:
                 show shadow baby happy
                 hide shadow baby happy
                 "THE END"
+            return
 
 
         else:
@@ -369,6 +371,7 @@ label start:
                     hide shadow baby happy
                     scene end
                     "THE END"
+                    return
 
             
             

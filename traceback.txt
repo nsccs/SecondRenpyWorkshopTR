@@ -1,0 +1,22 @@
+﻿I'm sorry, but an uncaught exception occurred.
+
+While running game code:
+  File "game/ice.rpy", line 155, in script
+    jump ending
+ScriptError: could not find label 'ending'.
+
+-- Full Traceback ------------------------------------------------------------
+
+Full traceback:
+  File "game/ice.rpy", line 155, in script
+    jump ending
+  File "C:\Users\HP\Downloads\renpy-8.3.4-sdk\renpy\ast.py", line 1705, in execute
+    rv = renpy.game.script.lookup(target)
+  File "C:\Users\HP\Downloads\renpy-8.3.4-sdk\renpy\script.py", line 1103, in lookup
+    raise ScriptError("could not find label '%s'." % str(original))
+ScriptError: could not find label 'ending'.
+
+Windows-10-10.0.22621 AMD64
+Ren'Py 8.3.4.24120703
+Monstera 1.0
+Mon Mar 24 01:52:32 2025
